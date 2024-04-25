@@ -51,7 +51,6 @@
   {
    "fieldname": "source_airport",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Source Airport",
    "options": "Airport",
    "reqd": 1
@@ -59,7 +58,6 @@
   {
    "fieldname": "destination_airport",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Destination Airport",
    "options": "Airport",
    "reqd": 1
@@ -69,7 +67,6 @@
    "fieldname": "source_airport_code",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Source Airport Code",
    "read_only": 1,
    "reqd": 1
@@ -79,7 +76,6 @@
    "fieldname": "destination_airport_code",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Destination Airport Code",
    "read_only": 1,
    "reqd": 1
@@ -94,6 +90,7 @@
   {
    "fieldname": "departure_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Departure Date",
    "reqd": 1
@@ -131,8 +128,10 @@
    "fieldtype": "Section Break"
   },
   {
+   "default": "Booked",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Booked\nChecked-In\nBoarded",
    "reqd": 1
@@ -141,7 +140,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-04-23 23:53:22.738089",
+ "modified": "2024-04-25 21:39:45.744719",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",
