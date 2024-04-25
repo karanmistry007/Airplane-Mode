@@ -8,7 +8,8 @@
   "first_name",
   "date_of_birth",
   "column_break_wonr",
-  "last_name"
+  "last_name",
+  "full_name"
  ],
  "fields": [
   {
@@ -33,6 +34,11 @@
   {
    "fieldname": "column_break_wonr",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Read Only",
+   "label": "Full Name"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -42,7 +48,7 @@
    "link_fieldname": "passenger"
   }
  ],
- "modified": "2024-04-23 23:59:04.320825",
+ "modified": "2024-04-25 22:08:07.683780",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Flight Passenger",
@@ -66,5 +72,5 @@
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
- "title_field": "first_name"
+ "title_field": "full_name"
 }
