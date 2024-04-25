@@ -1,0 +1,43 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="main">
+    <h1>
+        {{ name |e }}
+    </h1>
+
+    <h2>
+        Flight Details:
+    </h2>
+
+
+    <ol style="list-style-type: disc;">
+        <li>
+            Airline: {{ (frappe.db.get_value("Airplane",airplane,"airline")) |e }}
+        </li>
+        <li>
+            From: {{ (source_airport_code) |e }}
+        </li>
+        <li>
+            To: {{ (destination_airport_code) |e }}
+        </li>
+        <li>
+            Date of Departure: {{ frappe.format_date(date_of_departure) | e }}
+        </li>
+        <li>
+            Time of Departure: {{ frappe.format(time_of_departure, {'fieldtype': 'Time'}) |e }}
+        </li>
+        <li>
+            Duration: {{ frappe.format(duration, {'fieldtype': 'Duration'}) |e }}
+        </li>
+    </ol>
+
+    <a href="/book-flight-ticket/new?flight={{ name |e }}">
+        <button class="btn btn-primary">
+            Book Flight
+        </button>
+    </a>
+</div>
+{% endblock %}
+
+<!-- this is a sample default web page template -->

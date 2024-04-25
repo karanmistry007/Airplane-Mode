@@ -1,0 +1,35 @@
+<div>
+	<div class="card w-50 p-5 my-5">
+		<h5>
+			Flight : {{doc.name}}
+		</h5>
+
+		<h6>
+			From: {{ (doc.source_airport_code) |e }}
+		</h6>
+
+		<h6>
+			To: {{ (doc.destination_airport_code) |e }}
+		</h6>
+
+		<h6>
+			Date of Departure: {{ frappe.format_date(doc.date_of_departure) | e }}
+		</h6>
+
+		<h6>
+			Time of Departure: {{ frappe.format(doc.time_of_departure, {'fieldtype': 'Time'}) |e  }}
+		</h6>
+
+		<h6>
+			Duration: {{ frappe.format(doc.duration, {'fieldtype': 'Duration'}) |e  }}
+		</h6>
+
+		<a href="/{{ doc.route |e }}">
+			<button class="btn btn-primary">
+				View Flight
+			</button>
+		</a>
+	</div>
+
+</div>
+<!-- this is a sample default list template -->
