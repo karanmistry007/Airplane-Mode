@@ -9,7 +9,8 @@
   "model",
   "capacity",
   "column_break_ubgi",
-  "airline"
+  "airline",
+  "initial_audit_completed"
  ],
  "fields": [
   {
@@ -38,11 +39,18 @@
   {
    "fieldname": "column_break_ubgi",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "initial_audit_completed",
+   "fieldtype": "Check",
+   "label": "Initial Audit Completed",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-04-23 23:58:28.574500",
+ "modified": "2024-04-27 02:41:08.110454",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane",

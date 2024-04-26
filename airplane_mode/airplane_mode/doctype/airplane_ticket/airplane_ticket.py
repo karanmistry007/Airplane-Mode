@@ -12,7 +12,10 @@ class AirplaneTicket(Document):
     def before_save(self):
 
         # IF THE DOC IS NEW
-        if self.is_new:
+        if self.is_new():
+
+            # CALL FUNCTION CHECK THE AIRPLANE CAPACITY
+            self.check_airplane_capacity()
 
             # CALL THE GENERATE SEAT FUNCTION
             self.generate_seat()
@@ -96,3 +99,24 @@ class AirplaneTicket(Document):
 
         # SET THE SEAT NUMBER
         self.seat = seat
+
+    # CHECK THE AIRPLANE CAPACITY
+    def check_airplane_capacity(self):
+
+        # DEFINE VARIABLES NAD GET VALUES FROM REQUIRED DOCTYPE
+        airplane_flight = self.flight
+        flight_name = frappe.db.get_value(
+            "Airplane Flight", airplane_flight, "airplane"
+        )
+        flight_capacity = frappe.db.get_value("Airplane", flight_name, "capacity")
+
+        # GET THE LIST OF TICKETS AS PER THE CURRENT AIRPLANE FLIGHT
+        get_all_tickets = frappe.get_list(
+            "Airplane Ticket",
+            filters={"flight": airplane_flight},
+            fields=["name"],
+        )
+
+        # THROW ERROR IF THE NO OF TICKETS ARE MORE THAN THE SELECTED AIRPLANE FLIGHT
+        if len(get_all_tickets) >= flight_capacity:
+            frappe.throw("All The Tickets of The Selected Flight Has Been Booked!")
