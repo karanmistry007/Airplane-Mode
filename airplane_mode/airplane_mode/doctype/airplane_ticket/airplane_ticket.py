@@ -12,7 +12,7 @@ class AirplaneTicket(Document):
     def before_save(self):
 
         # IF THE DOC IS NEW
-        if self.is_new:
+        if self.is_new():
 
             # CALL THE GENERATE SEAT FUNCTION
             self.generate_seat()
