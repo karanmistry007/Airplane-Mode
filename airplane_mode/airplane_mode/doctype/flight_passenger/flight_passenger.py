@@ -20,4 +20,4 @@ class FlightPassenger(Document):
 		last_ame = self.last_name
 
 		# SET FULL NAME 
-		self.full_name = (first_name if first_name else "") + " " +(last_ame if last_ame else "")
+		self.full_name = (first_name if first_name else "") + (" "+last_ame if last_ame else "")
