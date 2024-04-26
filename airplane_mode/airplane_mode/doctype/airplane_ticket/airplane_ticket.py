@@ -1,7 +1,7 @@
 # Copyright (c) 2024, Karan Mistry and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 import random
 from frappe.model.document import Document
 
@@ -25,6 +25,19 @@ class AirplaneTicket(Document):
 
         # CALL FUNCTION CALCULATE TOTAL AMOUNT
         self.calculate_total_amount()
+
+    # BEFORE SUBMIT EVENT
+    def before_submit(self):
+
+        # CALL FUNCTION CHECK THE STATUS IS BOARDED BEFORE SUBMIT
+        self.check_the_status_equal_to_booked()
+
+    # CHECK THE STATUS IS BOARDED BEFORE SUBMIT
+    def check_the_status_equal_to_booked(self):
+        if self.status != "Boarded":
+            frappe.throw(
+                f'Please Set The Status To "Boarded" Before Submitting The Document!'
+            )
 
     # REMOVE DUPLICATE ADD ON ITEMS
     def remove_duplicate_add_ons(self):

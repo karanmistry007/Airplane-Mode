@@ -122,13 +122,13 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-    "Airplane Ticket": {
-        "before_submit": [
-            "airplane_mode.document_hook.airplane_ticket.check_the_status_equal_to_booked",
-        ],
-    }
-}
+# doc_events = {
+#     "Airplane Ticket": {
+#         "before_submit": [
+#             "airplane_mode.document_hook.airplane_ticket.check_the_status_equal_to_booked",
+#         ],
+#     }
+# }
 
 # Scheduled Tasks
 # ---------------
