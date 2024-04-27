@@ -4,10 +4,9 @@
 frappe.ui.form.on("Airline", {
     refresh(frm) {
         // SET THE VIEW WEBSITE LINK
-        if (frm.doc.website) {
-            var sidebar = frm.sidebar.user_actions;
-            sidebar.removeClass('hidden');
-            sidebar.append(`<a href="${frm.doc.website}">Visit Website</a>`);
+        var website_link = frm.doc.website
+        if (website_link) {
+            frm.add_web_link(website_link, "Visit Website");
         }
     },
 });
