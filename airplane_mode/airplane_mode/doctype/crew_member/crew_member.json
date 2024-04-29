@@ -1,0 +1,132 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{airline}-{employee_id}",
+ "creation": "2024-04-29 22:13:03.619701",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "first_name",
+  "last_name",
+  "full_name",
+  "column_break_yzwd",
+  "airline",
+  "employee_id",
+  "crew_type",
+  "contact_details_section",
+  "mobile_no",
+  "column_break_eabc",
+  "email",
+  "working_details_section",
+  "working_schedule"
+ ],
+ "fields": [
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "First Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name"
+  },
+  {
+   "fieldname": "airline",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Airline",
+   "options": "Airline",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "label": "Mobile No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "crew_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Crew Type",
+   "options": "Crew Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yzwd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_details_section",
+   "fieldtype": "Section Break",
+   "label": "Contact Details"
+  },
+  {
+   "fieldname": "column_break_eabc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "working_details_section",
+   "fieldtype": "Section Break",
+   "label": "Working Details"
+  },
+  {
+   "fieldname": "working_schedule",
+   "fieldtype": "Table",
+   "label": "Working Schedule",
+   "options": "Crew Working Days"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-29 22:43:19.360268",
+ "modified_by": "Administrator",
+ "module": "Airplane Mode",
+ "name": "Crew Member",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "full_name"
+}

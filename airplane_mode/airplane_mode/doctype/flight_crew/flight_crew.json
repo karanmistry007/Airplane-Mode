@@ -1,0 +1,170 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{flight}-{source_airport_code}-to-{destination_airport_code}-{###}",
+ "creation": "2024-04-29 22:46:23.573257",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "crew_member",
+  "status",
+  "column_break_tecb",
+  "flight",
+  "crew_type",
+  "section_break_uhet",
+  "source_airport_code",
+  "column_break_trpe",
+  "destination_airport_code",
+  "departure_details_section",
+  "departure_date",
+  "departure_time",
+  "column_break_ajoa",
+  "duration_of_flight",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "crew_member",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Crew Member",
+   "options": "Crew Member",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_tecb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "crew_member.crew_type",
+   "fieldname": "crew_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Crew Type"
+  },
+  {
+   "default": "Scheduled",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Scheduled\nCompleted\nOngoing\nCancelled",
+   "reqd": 1,
+   "sort_options": 1
+  },
+  {
+   "fieldname": "flight",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Flight",
+   "options": "Airplane Flight",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_uhet",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "flight.source_airport_code",
+   "fieldname": "source_airport_code",
+   "fieldtype": "Data",
+   "label": "Source Airport Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_trpe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "flight.destination_airport_code",
+   "fieldname": "destination_airport_code",
+   "fieldtype": "Data",
+   "label": "Destination Airport Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "departure_details_section",
+   "fieldtype": "Section Break",
+   "label": "Departure Details"
+  },
+  {
+   "fetch_from": "flight.date_of_departure",
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "label": "Departure Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ajoa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "00:00:00",
+   "fetch_from": "flight.time_of_departure",
+   "fieldname": "departure_time",
+   "fieldtype": "Time",
+   "label": "Departure Time",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "flight.duration",
+   "fieldname": "duration_of_flight",
+   "fieldtype": "Duration",
+   "label": "Duration of Flight",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Flight Crew",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-04-29 23:43:11.761107",
+ "modified_by": "Administrator",
+ "module": "Airplane Mode",
+ "name": "Flight Crew",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Scheduled"
+  },
+  {
+   "color": "Green",
+   "title": "Completed"
+  },
+  {
+   "color": "Orange",
+   "title": "Ongoing"
+  },
+  {
+   "color": "Red",
+   "title": "Cancelled"
+  }
+ ]
+}

@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{gate_number}-{passenger}-{flight}",
+ "creation": "2024-04-29 23:55:38.764258",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "gate_number",
+  "ticket",
+  "status",
+  "column_break_xlzl",
+  "passenger",
+  "flight",
+  "validity_section",
+  "start_date",
+  "column_break_emtb",
+  "end_date",
+  "section_break_crhb",
+  "purpose",
+  "column_break_yhvv",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fetch_from": "ticket.passenger",
+   "fieldname": "passenger",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Passenger",
+   "options": "Flight Passenger",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xlzl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "ticket.flight",
+   "fieldname": "flight",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Flight",
+   "options": "Airplane Flight",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_crhb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Small Text",
+   "label": "Purpose"
+  },
+  {
+   "fieldname": "column_break_yhvv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nPending\nApproved\nExpired\nUsed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "validity_section",
+   "fieldtype": "Section Break",
+   "label": "Validity Date"
+  },
+  {
+   "default": "Today",
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_emtb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ticket",
+   "fieldtype": "Link",
+   "label": "Ticket",
+   "mandatory_depends_on": "eval:doc.passener==\"\" || doc.passener==null || doc.flight==\"\" || doc.flight==null",
+   "options": "Airplane Ticket",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "gate_number",
+   "fieldtype": "Data",
+   "label": "Gate Number",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-30 01:47:13.011510",
+ "modified_by": "Administrator",
+ "module": "Airplane Mode",
+ "name": "Gate Pass",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Pending"
+  },
+  {
+   "color": "Green",
+   "title": "Approved"
+  },
+  {
+   "color": "Red",
+   "title": "Expired"
+  },
+  {
+   "color": "Gray",
+   "title": "Used"
+  }
+ ]
+}
