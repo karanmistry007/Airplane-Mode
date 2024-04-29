@@ -23,6 +23,9 @@ class AirplaneTicket(Document):
     # VALIDATE EVENT
     def validate(self):
 
+        # CALL FUNCTION CHECK THE GATE PASS
+        self.check_gate_pass()
+
         # CALL FUNCTION REMOVE DUPLICATE ADD ON ITEMS
         self.remove_duplicate_add_ons()
 
@@ -120,3 +123,10 @@ class AirplaneTicket(Document):
         # THROW ERROR IF THE NO OF TICKETS ARE MORE THAN THE SELECTED AIRPLANE FLIGHT
         if len(get_all_tickets) >= flight_capacity:
             frappe.throw("All The Tickets of The Selected Flight Has Been Booked!")
+
+    # CHECK THE GATE PASS
+    def check_gate_pass(self):
+        if self.status == "Boarded" and (
+            self.gate_pass == None or self.gate_pass == ""
+        ):
+            frappe.throw("""You cannot get "Boarded" without the "Gate Pass" please create one!""")

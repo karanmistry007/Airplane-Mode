@@ -11,6 +11,7 @@
   "column_break_qoqr",
   "flight",
   "seat",
+  "gate_pass",
   "section_break_dtio",
   "source_airport_code",
   "column_break_efns",
@@ -26,7 +27,6 @@
   "departure_time",
   "column_break_narp",
   "duration_of_flight",
-  "section_break_enwk",
   "amended_from"
  ],
  "fields": [
@@ -88,11 +88,11 @@
    "reqd": 1
   },
   {
+   "default": "00:00:00",
    "fetch_from": "flight.time_of_departure",
    "fieldname": "departure_time",
    "fieldtype": "Time",
    "label": "Departure Time",
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -117,10 +117,6 @@
   {
    "fieldname": "column_break_narp",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_enwk",
-   "fieldtype": "Section Break"
   },
   {
    "default": "Booked",
@@ -166,12 +162,19 @@
    "fieldtype": "Data",
    "label": "Seat",
    "read_only": 1
+  },
+  {
+   "fieldname": "gate_pass",
+   "fieldtype": "Link",
+   "label": "Gate Pass",
+   "options": "Gate Pass",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-04-27 14:30:02.998357",
+ "modified": "2024-04-30 01:45:16.704467",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",
@@ -227,6 +230,7 @@
    "write": 1
   }
  ],
+ "search_fields": "flight,passenger,source_airport_code,destination_airport_code",
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [
