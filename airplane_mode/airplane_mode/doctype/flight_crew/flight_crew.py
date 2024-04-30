@@ -17,6 +17,12 @@ class FlightCrew(Document):
         # CALL FUNCTION CHECK THE CREW MEMBER SCHEDULE
         self.check_crew_member_schedule()
 
+    # BEFORE SUBMIT EVENT
+    def before_submit(self):
+
+        # CALL FUNCTION CHECK THE STATUS BEFORE SUBMIT
+        self.check_status_before_submit()
+
     # CHECK THE CREW MEMBER SCHEDULE
     def check_crew_member_schedule(self):
 
@@ -71,4 +77,11 @@ class FlightCrew(Document):
         if check_slot:
             frappe.throw(
                 """The "Flight" is already scheduled with the selected "Crew Member"!"""
+            )
+
+    # CHECK THE STATUS BEFORE SUBMIT
+    def check_status_before_submit(self):
+        if self.status == "Scheduled" or self.status == "Ongoing":
+            frappe.throw(
+                f"""You cannot submit the with "Scheduled" or "Ongoing" Status!"""
             )
