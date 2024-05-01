@@ -1,0 +1,29 @@
+{
+ "cards": [],
+ "charts": [
+  {
+   "chart": "Shop Status",
+   "width": "Half"
+  },
+  {
+   "chart": "Shop Per Airport",
+   "width": "Half"
+  },
+  {
+   "chart": "Shop Rent",
+   "width": "Full"
+  }
+ ],
+ "creation": "2024-05-01 10:47:20.160258",
+ "dashboard_name": "Airport Shop",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2024-05-01 10:53:36.108491",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "Airport Shop",
+ "owner": "Administrator"
+}

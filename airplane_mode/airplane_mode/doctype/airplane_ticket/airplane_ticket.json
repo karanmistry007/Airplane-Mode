@@ -173,8 +173,17 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-04-30 01:45:16.704467",
+ "links": [
+  {
+   "link_doctype": "Ticket Payment",
+   "link_fieldname": "ticket"
+  },
+  {
+   "link_doctype": "Gate Pass",
+   "link_fieldname": "ticket"
+  }
+ ],
+ "modified": "2024-05-01 14:54:49.182769",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",

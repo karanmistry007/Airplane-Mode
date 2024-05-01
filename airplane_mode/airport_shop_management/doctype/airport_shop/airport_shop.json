@@ -1,0 +1,189 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{airport}-{shop_name}-{shop_number}",
+ "creation": "2024-04-30 22:36:53.771553",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "shop_name",
+  "shop_number",
+  "banner_image",
+  "column_break_vvyu",
+  "airport",
+  "area",
+  "status",
+  "section_break_ryhw",
+  "tenant_name",
+  "mobile_no",
+  "column_break_zmxm",
+  "email",
+  "address",
+  "section_break_pwnp",
+  "contract_start_date",
+  "rent_amount",
+  "column_break_qthl",
+  "contract_end_date",
+  "route"
+ ],
+ "fields": [
+  {
+   "fieldname": "shop_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shop Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shop_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shop Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tenant_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tenant Name",
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";",
+   "options": "Email"
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "label": "Mobile No",
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Link",
+   "label": "Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Float",
+   "label": "Area (sq. ft.)"
+  },
+  {
+   "fieldname": "rent_amount",
+   "fieldtype": "Currency",
+   "label": "Rent Amount",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "contract_start_date",
+   "fieldtype": "Date",
+   "label": "Contract Start Date",
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";"
+  },
+  {
+   "fieldname": "contract_end_date",
+   "fieldtype": "Date",
+   "label": "Contract End Date",
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";"
+  },
+  {
+   "fieldname": "airport",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Airport",
+   "options": "Airport",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vvyu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ryhw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_zmxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_pwnp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_qthl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nAvailable For Lease\nOn Lease\nClosed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "banner_image",
+   "fieldtype": "Attach Image",
+   "label": "Banner Image"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  }
+ ],
+ "has_web_view": 1,
+ "image_field": "banner_image",
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Airport Shop Rent",
+   "link_fieldname": "shop"
+  }
+ ],
+ "modified": "2024-05-01 12:13:35.982757",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "Airport Shop",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "route": "shop",
+ "search_fields": "shop_name, shop_number, airport, tenant_name",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Available For Lease"
+  },
+  {
+   "color": "Green",
+   "title": "On Lease"
+  },
+  {
+   "color": "Red",
+   "title": "Closed"
+  }
+ ],
+ "title_field": "shop_name"
+}

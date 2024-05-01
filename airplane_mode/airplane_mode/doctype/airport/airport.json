@@ -40,7 +40,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-04-27 14:25:50.339345",
+ "modified": "2024-05-01 10:27:48.857035",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airport",
@@ -99,6 +99,7 @@
    "share": 1
   }
  ],
+ "search_fields": "code, city , country",
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": []

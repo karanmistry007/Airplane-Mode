@@ -10,7 +10,7 @@
  "is_standard": "Yes",
  "json": "{\"filters\":[],\"fields\":[[\"airline\",\"Airplane\"],[\"_aggregate_column\",\"Airplane\"]],\"order_by\":\"`tabAirplane`.creation desc\",\"page_length\":20,\"column_widths\":{\"airline\":120,\"_aggregate_column\":200},\"group_by\":{\"group_by\":\"`tabAirplane`.`airline`\",\"aggregate_function\":\"count\",\"aggregate_on\":null}}",
  "letterhead": null,
- "modified": "2024-04-27 00:20:39.864630",
+ "modified": "2024-05-01 10:39:59.563962",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Reporting Time",

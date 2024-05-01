@@ -1,0 +1,60 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="main">
+    <h1>
+        {{ name |e }}
+    </h1>
+
+    <h2>
+        Shop Details:
+    </h2>
+
+
+    <ol style="list-style-type: disc;">
+        <li>
+            Shop Name: {{ (shop_name) |e }}
+        </li>
+        <li>
+            Shop Number: {{ (shop_number) |e }}
+        </li>
+        {% if doc.status == "On Lease" %}
+        {% set color = "#0a720a9c" %}
+        {% endif %}
+        {% if doc.status == "Available For Lease" %}
+        {% set color = "#2376d0bf" %}
+        {% endif %}
+        {% if doc.status == "Closed" %}
+        {% set color = "#ad1818bf" %}
+        {% endif %}
+        <li>
+            Status: <span
+                style="padding: 2px 5px;border-radius: 10px;font-size: 14px;color: white;background-color:{{color}};">
+                {{ (doc.status) |e }} </span>
+        </li>
+        <li>
+            Airport: {{ (airport) | e }}
+        </li>
+        <li>
+            Tenant Name: {{ (tenant_name) |e }}
+        </li>
+        <li>
+            Contract Start Date: {{ frappe.format(contract_start_date, {'fieldtype': 'Date'}) |e }}
+        </li>
+        <li>
+            Contract End Date: {{ frappe.format(contract_end_date, {'fieldtype': 'Date'}) |e }}
+        </li>
+        <li>
+            Rent Amount: {{ frappe.format(rent_amount, {'fieldtype': 'Currency'}) |e }}
+        </li>
+    </ol>
+
+    <a href="/book-flight-ticket/new?flight={{ name |e }}">
+        <button class="btn btn-primary">
+            Book Flight
+        </button>
+    </a>
+</div>
+{% endblock %}
+
+<!-- this is a sample default web page template -->
