@@ -48,12 +48,6 @@
             Rent Amount: {{ frappe.format(rent_amount, {'fieldtype': 'Currency'}) |e }}
         </li>
     </ol>
-
-    <a href="/book-flight-ticket/new?flight={{ name |e }}">
-        <button class="btn btn-primary">
-            Book Flight
-        </button>
-    </a>
 </div>
 {% endblock %}
 
