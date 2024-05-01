@@ -18,6 +18,8 @@ class AirportShopRent(Document):
 
             # CALL FUNCTION SET THE PAYMENT DATE
             self.check_payment_date()
+            # SET THE NAME OF THE DOCUMENT
+            self.name = f"{self.shop}-{self.from_date}-{self.to_date}"
 
     # BEFORE SUBMIT EVENT
     def before_submit(self):
@@ -75,8 +77,8 @@ class AirportShopRent(Document):
 @frappe.whitelist()
 # RENT REMINDER SCHEDULAR EVENT
 def send_rent_reminder():
-    rent_reminder = frappe.db.get_value(
-        "Airport Shop Settings", "Airport Shop Settings", "enable_rend_reminders"
+    rent_reminder = frappe.db.get_singles_value(
+        "Airport Shop Settings", "enable_rend_reminders"
     )
     if rent_reminder == 1:
         pending_rent_list = []
