@@ -23,7 +23,8 @@
   "contract_start_date",
   "rent_amount",
   "column_break_qthl",
-  "contract_end_date"
+  "contract_end_date",
+  "route"
  ],
  "fields": [
   {
@@ -45,20 +46,21 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Tenant Name",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";"
   },
   {
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email",
-   "options": "Email",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";",
+   "options": "Email"
   },
   {
    "fieldname": "mobile_no",
    "fieldtype": "Data",
    "label": "Mobile No",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";",
+   "options": "Phone"
   },
   {
    "fieldname": "address",
@@ -82,13 +84,13 @@
    "fieldname": "contract_start_date",
    "fieldtype": "Date",
    "label": "Contract Start Date",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";"
   },
   {
    "fieldname": "contract_end_date",
    "fieldtype": "Date",
    "label": "Contract End Date",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.status==\"On Lease\";"
   },
   {
    "fieldname": "airport",
@@ -129,8 +131,14 @@
    "fieldname": "banner_image",
    "fieldtype": "Attach Image",
    "label": "Banner Image"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
   }
  ],
+ "has_web_view": 1,
  "image_field": "banner_image",
  "index_web_pages_for_search": 1,
  "links": [
@@ -139,7 +147,7 @@
    "link_fieldname": "shop"
   }
  ],
- "modified": "2024-05-01 00:20:04.311249",
+ "modified": "2024-05-01 12:13:35.982757",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Airport Shop",
@@ -159,9 +167,23 @@
    "write": 1
   }
  ],
+ "route": "shop",
  "search_fields": "shop_name, shop_number, airport, tenant_name",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": [],
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Available For Lease"
+  },
+  {
+   "color": "Green",
+   "title": "On Lease"
+  },
+  {
+   "color": "Red",
+   "title": "Closed"
+  }
+ ],
  "title_field": "shop_name"
 }

@@ -2,11 +2,11 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.model.document import Document
+from frappe.website.website_generator import WebsiteGenerator
 from frappe.utils.data import add_months
 
 
-class AirportShop(Document):
+class AirportShop(WebsiteGenerator):
 
     # BEFORE SAVE EVENT
     def before_save(self):
@@ -30,5 +30,7 @@ class AirportShop(Document):
         contract_start_date = self.contract_start_date
         contract_end_date = self.contract_end_date
         date_after_month = add_months(contract_start_date, 1)
-        if contract_end_date < date_after_month:
-            frappe.throw("The contract should be more than 1 month!	")
+
+        if contract_end_date and date_after_month:
+            if contract_end_date < date_after_month:
+                frappe.throw("The contract should be more than 1 month!	")

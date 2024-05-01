@@ -4,6 +4,7 @@
 import frappe
 from frappe.model.document import Document
 from frappe.utils import getdate, add_months
+from frappe.utils.data import today
 
 
 class AirportShopRent(Document):
@@ -11,14 +12,26 @@ class AirportShopRent(Document):
     # BEFORE SAVE EVENT
     def before_save(self):
 
+        # CALL FUNCTION CHECK SHOP STATUS
+        self.check_shop_status()
         if self.is_new():
 
             # CALL FUNCTION SET THE PAYMENT DATE
             self.check_payment_date()
 
+    # BEFORE SUBMIT EVENT
+    def before_submit(self):
+        self.check_status_before_submit()
+
+    # CHECK SHOP STATUS
+    def check_shop_status(self):
+        shop = self.shop
+        shop_status = frappe.db.get_value("Airport Shop", shop, "status")
+        if shop_status != "On Lease":
+            frappe.throw("""The "Airport Shop" is not On Lease!""")
+
     # SET THE PAYMENT DATE
     def check_payment_date(self):
-        print("\n\n\n\n")
         shop = self.shop
         contract_start_date = frappe.db.get_value(
             "Airport Shop", shop, "contract_start_date"
@@ -53,27 +66,105 @@ class AirportShopRent(Document):
             self.from_date = contract_start_date
             self.to_date = add_months(contract_start_date, 1)
 
-        # from_date = getdate(self.from_date)
-        # to_date = getdate(self.to_date)
-        # shop = self.shop
-        # contract_start_date = frappe.db.get_value(
-        #     "Airport Shop", shop, "contract_start_date"
-        # )
-        # print("\n\n\n\n\n")
+    # CHECK STATUS BEFORE SUBMIT
+    def check_status_before_submit(self):
+        if self.status != "Paid":
+            frappe.throw("""You cannot submit without "Paid" Status!""")
 
-        # if from_date < contract_start_date:
-        #     frappe.throw(""""From Date" cannot be before "Contract Start Date"!""")
 
-        # shop_rent_list = frappe.db.get_all(
-        #     "Airport Shop Rent",
-        #     filters={
-        #         "shop": shop,
-        #         "to_date": ["<", from_date],
-        #     },
-        # )
-        # print(shop_rent_list)
+@frappe.whitelist()
+# RENT REMINDER SCHEDULAR EVENT
+def send_rent_reminder():
+    rent_reminder = frappe.db.get_value(
+        "Airport Shop Settings", "Airport Shop Settings", "enable_rend_reminders"
+    )
+    if rent_reminder == 1:
+        pending_rent_list = []
+        current_date = today()
+        shop_list = frappe.db.get_all(
+            "Airport Shop",
+            filters={"status": "On Lease"},
+            fields=[
+                "name",
+                "shop_name",
+                "airport",
+                "tenant_name",
+                "email",
+                "contract_start_date",
+                "contract_end_date",
+                "rent_amount",
+            ],
+        )
 
-        # if shop_rent_list:
-        #     frappe.throw(
-        #         """Airport Shop Rent already exists with the selected dates!"""
-        #     )
+        for shop in shop_list:
+            last_payed_doc_list = frappe.db.get_list(
+                "Airport Shop Rent",
+                filters={
+                    "shop": shop.name,
+                    "status": "Paid",
+                },
+                fields=["name", "to_date"],
+                order_by="to_date desc",
+            )
+            # print(last_payed_doc)
+
+            if last_payed_doc_list:
+                last_payed_doc = last_payed_doc_list[0]
+                if getdate(last_payed_doc.to_date) < getdate(current_date):
+                    pending_rent_list.append(
+                        {
+                            "tenant_name": shop.tenant_name,
+                            "tenant_email": shop.email,
+                            "to_date": last_payed_doc.to_date,
+                            "rent_amount": shop.rent_amount,
+                            "shop": shop.name,
+                            "shop_name": shop.shop_name,
+                            "airport": shop.airport,
+                        }
+                    )
+
+            else:
+                pending_rent_list.append(
+                    {
+                        "tenant_name": shop.tenant_name,
+                        "tenant_email": shop.email,
+                        "to_date": shop.contract_start_date,
+                        "rent_amount": shop.rent_amount,
+                        "shop": shop.name,
+                        "shop_name": shop.shop_name,
+                        "airport": shop.airport,
+                    }
+                )
+
+        for data in pending_rent_list:
+            recipient = data["tenant_email"] or ""
+            subject = "Rent Reminder!"
+            message = f"""
+    <div class="message">
+        <p>Hello <b>{data["tenant_name"]}</b>,</br>
+            Your Rent Amount <b>{data["rent_amount"]}</b> has been pending from <b>{data["to_date"]}</b> for your shop
+            <b>{data["shop_name"]}</b> with id <b>{data["shop"]}</b> in Airport <b>{data["airport"]}</b> Please Kindly Pay
+            Your Rent.</br>
+            Thank You.
+        </p>
+    </div>
+    <div class="content">
+        <p>
+            Shop: {data["tenant_name"]}
+        </p>
+        <p>
+            Shop Name: {data["shop_name"]}
+        </p>
+        <p>
+            Airport: {data["airport"]}
+        </p>
+        <p>
+            Rent Amount: {data["rent_amount"]}
+        </p>
+    </div>"""
+
+            frappe.sendmail(
+                recipients=recipient,
+                subject=subject,
+                message=message,
+            )

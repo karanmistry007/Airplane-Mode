@@ -1,0 +1,137 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:Payment-{date_paid}-{ticket}",
+ "creation": "2024-05-01 14:48:10.620694",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_d5rj",
+  "ticket",
+  "passenger",
+  "column_break_geyp",
+  "flight",
+  "status",
+  "payment_details_section",
+  "date_paid",
+  "amount_paid",
+  "column_break_odkk",
+  "payment_method",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_d5rj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Ticket Payment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "ticket",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Ticket",
+   "options": "Airplane Ticket",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "ticket.total_amount",
+   "fetch_if_empty": 1,
+   "fieldname": "amount_paid",
+   "fieldtype": "Currency",
+   "label": "Amount Paid"
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Payment Method",
+   "options": "\nCash\nDebit Card\nCredit Card\nUPI\nBank Draft",
+   "reqd": 1
+  },
+  {
+   "default": "Paid",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "\nPaid\nUnpaid\nPartially Paid",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "date_paid",
+   "fieldtype": "Date",
+   "label": "Date Paid",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "ticket.flight",
+   "fieldname": "flight",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Flight",
+   "options": "Airplane Flight"
+  },
+  {
+   "fieldname": "column_break_geyp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_details_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "fieldname": "column_break_odkk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "ticket.passenger",
+   "fieldname": "passenger",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Passenger",
+   "options": "Flight Passenger"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-05-01 15:18:21.545963",
+ "modified_by": "Administrator",
+ "module": "Airplane Mode",
+ "name": "Ticket Payment",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

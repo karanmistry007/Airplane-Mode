@@ -1,0 +1,46 @@
+<div>
+	<div class="card w-50 p-5 my-5">
+		<h5>
+			Shop : {{doc.name}}
+		</h5>
+
+		<h6>
+			Shop Name: {{ (doc.shop_name) |e }}
+		</h6>
+
+		<h6>
+			Shop Number: {{ (doc.shop_number) |e }}
+		</h6>
+
+		{% if doc.status == "On Lease" %}
+		{% set color = "#0a720a9c" %}
+		{% endif %}
+		{% if doc.status == "Available For Lease" %}
+		{% set color = "#2376d0bf" %}
+		{% endif %}
+		{% if doc.status == "Closed" %}
+		{% set color = "#ad1818bf" %}
+		{% endif %}
+
+		<h6>
+			Status: <span
+				style="padding: 2px 5px;border-radius: 10px;font-size: 14px;color: white;background-color:{{color}};">
+				{{ (doc.status) |e }} </span>
+		</h6>
+
+		<h6>
+			Airport: {{ (doc.airport) | e }}
+		</h6>
+
+		<h6>
+			Tenant Name: {{ (doc.tenant_name) |e }}
+		</h6>
+
+		<a href="/{{ doc.route |e }}">
+			<button class="btn btn-primary">
+				View Shop Details
+			</button>
+		</a>
+	</div>
+</div>
+<!-- this is a sample default list template -->

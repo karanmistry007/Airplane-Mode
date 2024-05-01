@@ -106,7 +106,7 @@ frappe.ui.form.on("Airplane Ticket", {
                                 callback: function (response) {
                                     var response_message = response.message;
                                     if (response_message) {
-                                        console.log(response_message)
+                                        // console.log(response_message)
                                         frappe.show_alert({
                                             message: __('Gate Pass is Created Successfully!'),
                                             indicator: 'green'
@@ -123,5 +123,95 @@ frappe.ui.form.on("Airplane Ticket", {
                 },
                 "Actions");
         }
+
+
+        // CHECK IF THE PAYMENT ALREADY EXIST OR NOT
+        frappe.call({
+            method: "frappe.client.get_list",
+            args: {
+                doctype: "Ticket Payment",
+                filters: { ticket: frm.doc.name },
+                fields: ["name"]
+            },
+            callback: function (response) {
+                var response_message = response.message
+
+                if (response_message == [] || response_message == "" || response_message == null) {
+                    // ADD CREATE PAYMENT BUTTON
+                    frm.add_custom_button(__("Create Payment"),
+                        () => {
+                            let d = new frappe.ui.Dialog({
+                                title: 'Create Payment',
+                                fields: [
+                                    {
+                                        label: 'Ticket',
+                                        fieldname: 'ticket',
+                                        fieldtype: 'Link',
+                                        options: "Airplane Ticket",
+                                        default: frm.doc.name,
+                                        read_only: 1,
+                                    },
+                                    {
+                                        label: 'Status',
+                                        fieldname: 'status',
+                                        fieldtype: 'Select',
+                                        options: "\nPaid\nUnpaid\nPartially Paid",
+                                        reqd: 1,
+                                    },
+                                    {
+                                        label: 'Payment Method',
+                                        fieldname: 'payment_method',
+                                        fieldtype: 'Select',
+                                        options: "\nCash\nDebit Card\nCredit Card\nUPI\nBank Draft",
+                                        reqd: 1,
+                                    },
+                                    {
+                                        label: 'Amount Paid',
+                                        fieldname: 'amount_paid',
+                                        fieldtype: 'Currency',
+                                        default: frm.doc.total_amount,
+                                        reqd: 1,
+                                    },
+                                ],
+                                primary_action_label: 'Assign',
+                                primary_action(values) {
+                                    console.log(values);
+                                    frappe.call({
+                                        method: "frappe.client.insert",
+                                        args: {
+                                            doc: {
+                                                doctype: "Ticket Payment",
+                                                ticket: values.ticket,
+                                                status: values.status,
+                                                payment_method: values.payment_method,
+                                                amount_paid: values.amount_paid,
+                                            }
+                                        },
+                                        callback: function (response) {
+                                            var response_message = response.message;
+                                            if (response_message) {
+                                                console.log(response_message)
+                                                frappe.show_alert({
+                                                    message: __('Payment is Created Successfully!'),
+                                                    indicator: 'green'
+                                                }, 5);
+
+                                                if (frm.is_dirty()) {
+                                                    frm.save()
+                                                } else {
+                                                    frm.reload_doc()
+                                                }
+                                            }
+                                        }
+                                    })
+                                    d.hide();
+                                }
+                            });
+                            d.show();
+                        },
+                        "Actions")
+                }
+            }
+        });
     },
 });

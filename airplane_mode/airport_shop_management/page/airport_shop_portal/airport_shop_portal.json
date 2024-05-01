@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2024-05-01 14:11:06.146580",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2024-05-01 14:16:00.879795",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "airport-shop-portal",
+ "owner": "Administrator",
+ "page_name": "airport-shop-portal",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Airport Shop Portal"
+}
